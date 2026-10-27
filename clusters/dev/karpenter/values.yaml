@@ -1,0 +1,15 @@
+serviceAccount:
+  name: karpenter
+
+settings:
+  clusterName: "eks-cluster"
+  interruptionQueue: "eks-cluster"
+
+nodeSelector:
+  role: system
+
+tolerations:
+  - key: dedicated
+    operator: Equal
+    value: system_pods
+    effect: NoSchedule
