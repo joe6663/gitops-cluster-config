@@ -15,7 +15,7 @@ spec:
       helm:
         releaseName: karpenter
         valueFiles:
-          - $clusters/dev/values.yaml
+          - $clusterValuesdev/clusters/dev/karpenter/values.yaml
 
     # 2. Your Internal GitOps Repository
     - repoURL: https://github.com/joe6663/gitops-cluster-config.git
