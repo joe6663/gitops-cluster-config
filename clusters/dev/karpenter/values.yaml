@@ -3,7 +3,7 @@ serviceAccount:
 
 settings:
   clusterName: "eks-cluster-dev"
-  interruptionQueue: "eks-cluster-dev"
+  interruptionQueue: "Karpenter-eks-cluster-dev"
 
 nodeSelector:
   role: system
