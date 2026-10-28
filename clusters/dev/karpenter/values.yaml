@@ -1,4 +1,5 @@
 serviceAccount:
+  create: true
   name: karpenter
 
 settings:
@@ -14,6 +15,7 @@ tolerations:
     value: system_pods
     effect: NoSchedule
 
+# Avoid OOMKills and CPU throttling during sudden pod burst events
 controller:
   resources:
     requests:

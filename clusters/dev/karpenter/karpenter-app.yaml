@@ -3,19 +3,33 @@ kind: Application
 metadata:
   name: karpenter
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-  source:
-    repoURL: 'oci://public.ecr.aws/karpenter'
-    chart: karpenter
-    targetRevision: '1.2.1'
-    helm:
-      valueFiles:
-        - values.yaml
+  sources:
+    # 1. Upstream Up-to-date OCI Helm Chart from AWS ECR
+    - repoURL: public.ecr.aws/karpenter
+      chart: karpenter
+      targetRevision: 1.2.1
+      helm:
+        releaseName: karpenter
+        valueFiles:
+          - $clusterValuesdev/clusters/dev/karpenter/values.yaml
+
+    # 2. Your Internal GitOps Repository
+    - repoURL: https://github.com/joe6663/gitops-cluster-config.git
+      targetRevision: main
+      ref: clusterValuesdev
+
   destination:
-    server: 'https://kubernetes.default.svc'
+    server: https://kubernetes.default.svc   # need to be filled with the actual Kubernetes API server URL
     namespace: kube-system
+
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
