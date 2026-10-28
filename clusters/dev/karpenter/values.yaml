@@ -2,8 +2,8 @@ serviceAccount:
   name: karpenter
 
 settings:
-  clusterName: "eks-cluster"
-  interruptionQueue: "eks-cluster"
+  clusterName: "eks-cluster-dev"
+  interruptionQueue: "eks-cluster-dev"
 
 nodeSelector:
   role: system
@@ -13,3 +13,13 @@ tolerations:
     operator: Equal
     value: system_pods
     effect: NoSchedule
+
+controller:
+  resources:
+    requests:
+      cpu: "1"
+      memory: "1Gi"
+    limits:
+      cpu: "1"
+      memory: "1Gi"
+  logLevel: info
