@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: dev-nodepools
+  namespace: argocd
+
+spec:
+  project: default
+
+  source:
+    repoURL: git@github.com:joe6663/gitops-cluster-config.git
+    targetRevision: main
+    path: clusters/dev/nodepools
+
+  destination:
+    server: https://kubernetes.default.svc
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+    syncOptions:
+      - ServerSideApply=true
