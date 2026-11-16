@@ -8,6 +8,11 @@
 *.secret
 .terraform/
 
+*.wav
+*.pub
+argocd-gitops
+argocd_dev_deploy_key
+
 
 *.tfstate
 *.tfstate.*
