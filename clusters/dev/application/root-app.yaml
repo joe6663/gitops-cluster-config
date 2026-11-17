@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: git@github.com:joe6663/gitops-cluster-config.git
     targetRevision: main
-    path: clusters/dev/applications
+    path: clusters/dev/application
 
   destination:
     server: https://kubernetes.default.svc
